@@ -6,8 +6,6 @@ from maze import Maze
 class DepthFirstSearch(GraphSearch):
     def __init__(self, maze: Maze):
         super().__init__(maze)
-        self.start = super().start
-        self.end_points = super().end_points
         self.visited = set()
         self.path = []
         self.current = self.start
@@ -18,7 +16,7 @@ class DepthFirstSearch(GraphSearch):
             self.path.append(self.current)
             neighbors = self._actions(self.current[0], self.current[1])
 
-            if all(neighbor in self.visited for neighbor in neighbors):
+            if all(neighbor in self.visited for neighbor in neighbors) or not neighbors:
                 self._backtrack()
                 continue
 
@@ -33,11 +31,14 @@ class DepthFirstSearch(GraphSearch):
         return self.path
 
     def _actions(self, x: int, y: int) -> List[Tuple[int, int]]:
+        neighbors = [(x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)]
+        new_neighbors = []
+        for neighbor in neighbors:
+            if self.matrix[neighbor[0]][neighbor[1]] == 1:
+                new_neighbors.append(neighbor)
 
-        pass
-
-    def _explore(self, frontier: List[Tuple[int, int]], explored: set):
-        pass
+        return new_neighbors
 
     def _backtrack(self):
-        pass
+        self.path.pop()
+        self.current = self.path.pop()
