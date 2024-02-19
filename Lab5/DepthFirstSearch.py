@@ -10,14 +10,24 @@ class DepthFirstSearch(GraphSearch):
         self.path = []
         self.current = self.start
 
-    def solve(self) -> List[Tuple[int, int]]:
-        while self.current != self.end_points[0]:  # TODO: Manejar multiples metas y caso donde no se encuentre solucion
+    def solve(self) -> List[List[Tuple[int, int]]]:
+        solutions = []
+        for goal in self.end_points:
+            path = self.reach_goal(goal)
+            solutions.append(path)
+
+        return solutions
+
+    def reach_goal(self, goal: Tuple[int, int]) -> List[Tuple[int, int]]:
+        keep_searching = True
+
+        while self.current != goal and keep_searching:
             self.visited.add(self.current)
             self.path.append(self.current)
             neighbors = self._actions(self.current[0], self.current[1])
 
             if all(neighbor in self.visited for neighbor in neighbors) or not neighbors:
-                self._backtrack()
+                keep_searching = self._backtrack()
                 continue
 
             for neighbor in neighbors:
@@ -39,6 +49,13 @@ class DepthFirstSearch(GraphSearch):
 
         return new_neighbors
 
-    def _backtrack(self):
-        self.path.pop()
-        self.current = self.path.pop()
+    def _backtrack(self) -> bool:
+        """Backtracks to the last cell with unvisited neighbors.
+            if it is not possible to backtrack, returns False
+        """
+        try:
+            self.path.pop()
+            self.current = self.path.pop()
+            return True
+        except IndexError:
+            return False

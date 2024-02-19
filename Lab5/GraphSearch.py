@@ -10,7 +10,7 @@ class GraphSearch(ABC):
         self.end_points = maze.end_points
 
     @abstractmethod
-    def solve(self) -> List[Tuple[int, int]]:
+    def solve(self) -> List[List[Tuple[int, int]]]:
         """
         Solves the maze and returns a list of coordinates representing the solution path.
 
