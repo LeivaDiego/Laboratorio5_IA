@@ -122,7 +122,7 @@ class Maze:
 	def animate_paths(self, paths, upscale, search_type, fps):
 		path_colors = [
 			(255, 105, 180),  # Rosado
-			(12, 183, 242),   # Azul
+			(12, 183, 242),   # Celeste
 			(255, 165, 0)     # Naranja
 		]
     
@@ -132,7 +132,7 @@ class Maze:
 		frames = []
     
 		scale_factor = upscale
-
+		print("Generando frames escalados de la animacion...")
 		for path_index, path in enumerate(paths):
 			color = path_colors[path_index % len(path_colors)]
 			for point in path:
@@ -140,7 +140,7 @@ class Maze:
 				color_labyrinth[self.start_point[0], self.start_point[1]] = [255, 0, 0]
 				for goal in self.end_points:
 					color_labyrinth[goal[0], goal[1]] = [0, 255, 0]
-        
+					
 					resized_image = transform.resize(color_labyrinth, (height * scale_factor, width * scale_factor),
 										   anti_aliasing=True, mode='reflect', preserve_range=True, order=0).astype(np.uint8)
         
@@ -151,7 +151,7 @@ class Maze:
 			solutions_folder = 'solutions'
 			if not os.path.exists(solutions_folder):
 				os.makedirs(solutions_folder)
-        
+			print("Generando GIF...")
 			gif_name = os.path.join(solutions_folder, f"{self.name.split('.')[0]}_{search_type}.gif")
 			frames[0].save(gif_name, format="GIF", append_images=frames[1:], save_all=True, duration=fps, loop=0)
 			print(f"GIF guardado como: {gif_name}")

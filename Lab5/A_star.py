@@ -16,7 +16,7 @@ class AStar(GraphSearch):
         goal = self.end_points[0]  # Tomamos solo el primer punto final
         heapq.heappush(self.frontier, (0, start))
         self.cost_so_far[start] = 0
-
+        print("Aplicando algoritmo A*...")
         while self.frontier:
             current_cost, current_node = heapq.heappop(self.frontier)
 
@@ -34,7 +34,7 @@ class AStar(GraphSearch):
 
         path = self.reconstruct_path(start, goal)
         self.paths.append(path)
-
+        print("Camino encontrado:")
         return self.paths
 
     def reconstruct_path(self, start: Tuple[int, int], goal: Tuple[int, int]) -> List[Tuple[int, int]]:

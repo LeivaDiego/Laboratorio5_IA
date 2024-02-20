@@ -12,11 +12,12 @@ class DepthFirstSearch(GraphSearch):
 
     def solve(self) -> List[List[Tuple[int, int]]]:
         solutions = []
+        print("Aplicando algoritmo DFS...")
         for goal in self.end_points:
             path = self.reach_goal(goal)
             solutions.append(path)
             self._reset()
-
+        print("Caminos encontrados:")
         return solutions
 
     def _reset(self):
