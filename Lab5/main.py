@@ -1,5 +1,6 @@
 from maze import Maze
 from DepthFirstSearch import DepthFirstSearch
+from A_star import AStar
 import os
 
 
@@ -26,9 +27,22 @@ def discretize_maze():
 
 def main():
     mazes = discretize_maze()
-    dfs = DepthFirstSearch(mazes[0])
-    camino = dfs.solve()
 
+    # Ejecutar A*
+    a_star = AStar(mazes[0])
+    actions = a_star._actions(0, 0)
+    path = a_star.solve()
+    print("Camino encontrado por A*:", path)
+    if path:
+        maze = mazes[2]
+        for pos in path:
+            maze.labyrinth[pos[0]][pos[1]] = 2
+        maze.visualize()
+
+    # Ejecutar DFS
+    # dfs = DepthFirstSearch(mazes[0])
+    # camino = dfs.solve()
+    #
     # print(camino)
     # maze = mazes[0]
     # maze.visualize()
