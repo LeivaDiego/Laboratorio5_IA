@@ -34,6 +34,11 @@ def main():
         print(paths)
         maze.animate_paths(paths, upscale, "DFS")
 
+    dfs = DepthFirstSearch(mazes[1])
+    camino = dfs.solve()
+    print()
+
+
     # Ejecutar A*
     # a_star = AStar(mazes[0])
     # actions = a_star._actions(0, 0)

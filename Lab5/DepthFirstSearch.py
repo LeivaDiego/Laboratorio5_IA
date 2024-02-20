@@ -15,8 +15,14 @@ class DepthFirstSearch(GraphSearch):
         for goal in self.end_points:
             path = self.reach_goal(goal)
             solutions.append(path)
+            self._reset()
 
         return solutions
+
+    def _reset(self):
+        self.path = []
+        self.visited = set()
+        self.current = self.start
 
     def reach_goal(self, goal: Tuple[int, int]) -> List[Tuple[int, int]]:
         keep_searching = True
