@@ -26,42 +26,21 @@ def discretize_maze():
 
 def main():
     mazes = discretize_maze()
-    upscale_factors = [30,30,30,10]
+    upscale_factors = [40,30,30,5]
+    fps_values = [100,50,50,2]
     
-    for maze, upscale in zip(mazes, upscale_factors):
+    for maze, upscale, fps in zip(mazes, upscale_factors, fps_values):
+        print("-"*20,f"{maze.name}","-"*20,"/n")
+        print("-"*20,"DFS","-"*20)
         dfs = DepthFirstSearch(maze)
-        paths = dfs.solve()
-        print(paths)
-        maze.animate_paths(paths, upscale, "DFS")
-
-    dfs = DepthFirstSearch(mazes[1])
-    camino = dfs.solve()
-    print()
-
-
-    # Ejecutar A*
-    # a_star = AStar(mazes[0])
-    # actions = a_star._actions(0, 0)
-    # path = a_star.solve()
-    # print("Camino encontrado por A*:", path)
-    # if path:
-    #     maze = mazes[2]
-    #     for pos in path:
-    #        maze.labyrinth[pos[0]][pos[1]] = 2
-    #     maze.visualize()
-
-    # Ejecutar DFS
-    # dfs = DepthFirstSearch(mazes[0])
-    # camino = dfs.solve()
-    #
-    # print(camino)
-    # maze = mazes[0]
-    # maze.visualize()
-    # maze_matriz = maze.labyrinth
-    #
-    # for i in range(len(camino)):
-    #     maze_matriz[camino[i][0]][camino[i][1]] = 2
-    # print(maze_matriz)
+        paths_dfs = dfs.solve()
+        print("Animando y Escalando los caminos...")
+        maze.animate_paths(paths_dfs, upscale, "DFS", fps)
+        print("-"*20,"A*","-"*20)
+        a_star =  AStar(maze)
+        paths_a = a_star.solve()
+        print("Animando y Escalando los caminos...")
+        maze.animate_paths(paths_a, upscale, "A_Star", fps)
 
 if __name__ == '__main__':
     main()

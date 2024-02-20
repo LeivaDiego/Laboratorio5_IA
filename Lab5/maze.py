@@ -119,7 +119,7 @@ class Maze:
 		plt.axis('off')
 		plt.show()
 		
-	def animate_paths(self, paths, upscale, search_type):
+	def animate_paths(self, paths, upscale, search_type, fps):
 		path_colors = [
 			(255, 105, 180),  # Rosado
 			(12, 183, 242),   # Azul
@@ -153,5 +153,5 @@ class Maze:
 				os.makedirs(solutions_folder)
         
 			gif_name = os.path.join(solutions_folder, f"{self.name.split('.')[0]}_{search_type}.gif")
-			frames[0].save(gif_name, format="GIF", append_images=frames[1:], save_all=True, duration=100, loop=0)
+			frames[0].save(gif_name, format="GIF", append_images=frames[1:], save_all=True, duration=fps, loop=0)
 			print(f"GIF guardado como: {gif_name}")
