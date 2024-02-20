@@ -1,6 +1,7 @@
 from maze import Maze
 from DepthFirstSearch import DepthFirstSearch
 from A_star import AStar
+from BreadthFirstSearch import BreadthFirstSearch
 import os
 
 def main():
