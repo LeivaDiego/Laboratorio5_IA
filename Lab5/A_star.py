@@ -6,7 +6,7 @@ import heapq
 class AStar(GraphSearch):
     def __init__(self, maze: Maze):
         super().__init__(maze)
-        self.path = []
+        self.paths = []
         self.frontier = []
         self.cost_so_far = {}
         self.came_from = {}
@@ -32,8 +32,10 @@ class AStar(GraphSearch):
                     heapq.heappush(self.frontier, (priority, next_node))
                     self.came_from[next_node] = current_node
 
-        self.path = self.reconstruct_path(start, goal)
-        return self.path
+        path = self.reconstruct_path(start, goal)
+        self.paths.append(path)
+
+        return self.paths
 
     def reconstruct_path(self, start: Tuple[int, int], goal: Tuple[int, int]) -> List[Tuple[int, int]]:
         current_node = goal
