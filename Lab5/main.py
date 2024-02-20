@@ -1,5 +1,6 @@
 from maze import Maze
 from DepthFirstSearch import DepthFirstSearch
+from A_star import AStar
 import os
 
 
@@ -32,6 +33,30 @@ def main():
         paths = dfs.solve()
         print(paths)
         maze.animate_paths(paths, upscale, "DFS")
+
+    # Ejecutar A*
+    # a_star = AStar(mazes[0])
+    # actions = a_star._actions(0, 0)
+    # path = a_star.solve()
+    # print("Camino encontrado por A*:", path)
+    # if path:
+    #     maze = mazes[2]
+    #     for pos in path:
+    #        maze.labyrinth[pos[0]][pos[1]] = 2
+    #     maze.visualize()
+
+    # Ejecutar DFS
+    # dfs = DepthFirstSearch(mazes[0])
+    # camino = dfs.solve()
+    #
+    # print(camino)
+    # maze = mazes[0]
+    # maze.visualize()
+    # maze_matriz = maze.labyrinth
+    #
+    # for i in range(len(camino)):
+    #     maze_matriz[camino[i][0]][camino[i][1]] = 2
+    # print(maze_matriz)
 
 if __name__ == '__main__':
     main()
