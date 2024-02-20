@@ -11,7 +11,7 @@ class AStar(GraphSearch):
         self.cost_so_far = {}
         self.came_from = {}
 
-    def solve(self) -> List[Tuple[int, int]]:
+    def solve(self, heuristic_func) -> List[Tuple[int, int]]:
         start = self.start
         goal = self.end_points[0]  # Tomamos solo el primer punto final
         heapq.heappush(self.frontier, (0, start))
@@ -28,7 +28,7 @@ class AStar(GraphSearch):
 
                 if next_node not in self.cost_so_far or new_cost < self.cost_so_far[next_node]:
                     self.cost_so_far[next_node] = new_cost
-                    priority = new_cost + self.heuristic(goal, next_node)
+                    priority = new_cost + heuristic_func(goal, next_node)
                     heapq.heappush(self.frontier, (priority, next_node))
                     self.came_from[next_node] = current_node
 
@@ -36,6 +36,14 @@ class AStar(GraphSearch):
         self.paths.append(path)
         print("Camino encontrado:")
         return self.paths
+
+    def heuristic_manhattan(self, a: Tuple[int, int], b: Tuple[int, int]) -> float:
+        # Heurística de distancia Manhattan
+        return abs(a[0] - b[0]) + abs(a[1] - b[1])
+
+    def heuristic_euclidean(self, a: Tuple[int, int], b: Tuple[int, int]) -> float:
+        # Heurística de distancia euclidiana
+        return ((a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2) ** 0.5
 
     def reconstruct_path(self, start: Tuple[int, int], goal: Tuple[int, int]) -> List[Tuple[int, int]]:
         current_node = goal
@@ -49,10 +57,6 @@ class AStar(GraphSearch):
         path.reverse()
         return path
 
-    def heuristic(self, a: Tuple[int, int], b: Tuple[int, int]) -> float:
-        # Heurística de distancia Manhattan
-        return abs(a[0] - b[0]) + abs(a[1] - b[1])
-
     def _actions(self, x: int, y: int) -> List[Tuple[int, int]]:
         neighbors = [(x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)]
         new_neighbors = []
@@ -65,3 +69,4 @@ class AStar(GraphSearch):
 
     def get_path(self) -> List[Tuple[int, int]]:
         return self.path
+

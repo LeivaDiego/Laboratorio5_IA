@@ -32,7 +32,7 @@ def main():
 
 		print("\n","-" * 18, " A* ", "-" * 18, "\n")
 		a_star = AStar(maze)
-		paths_a = a_star.solve()
+		paths_a = a_star.solve(a_star.heuristic_manhattan) # Se puede cambiar a a_star.heuristic_euclidean para probar la otra heurística
 		print(paths_a)
 		maze.animate_paths(paths_a, upscale, "A_Star", fps)
 		print("-" * 40,"\n"*5)
