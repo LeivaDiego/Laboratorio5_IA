@@ -18,26 +18,20 @@ def discretize_maze():
         print("Posicion de inicio:", maze.start_point)
         print("Posiciones de metas:", maze.end_points)
         print("-" * 40)
-        # maze.visualize()
         mazes.append(maze)
-
+        
     return mazes
 
 
 def main():
     mazes = discretize_maze()
-    dfs = DepthFirstSearch(mazes[0])
-    camino = dfs.solve()
-
-    # print(camino)
-    # maze = mazes[0]
-    # maze.visualize()
-    # maze_matriz = maze.labyrinth
-    #
-    # for i in range(len(camino)):
-    #     maze_matriz[camino[i][0]][camino[i][1]] = 2
-    # print(maze_matriz)
-
+    upscale_factors = [30,30,30,10]
+    
+    for maze, upscale in zip(mazes, upscale_factors):
+        dfs = DepthFirstSearch(maze)
+        paths = dfs.solve()
+        print(paths)
+        maze.animate_paths(paths, upscale, "DFS")
 
 if __name__ == '__main__':
     main()
