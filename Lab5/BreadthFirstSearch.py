@@ -14,9 +14,11 @@ class BreadthFirstSearch(GraphSearch):
 
     def solve(self) -> List[List[Tuple[int, int]]]:
         paths = []
+        print("Aplicando algoritmo BFS...")
         for goal in self.end_points:
             path = self._reach_goal(goal)
             paths.append(path)
+        print("Caminos encontrados:")
         return paths
 
     def _reach_goal(self, goal: Tuple[int, int]) -> List[Tuple[int, int]]:

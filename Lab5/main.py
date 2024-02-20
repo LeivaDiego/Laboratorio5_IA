@@ -1,7 +1,7 @@
 from maze import Maze
 from DepthFirstSearch import DepthFirstSearch
-from A_star import AStar
 from BreadthFirstSearch import BreadthFirstSearch
+from A_star import AStar
 import os
 
 def main():
@@ -24,6 +24,12 @@ def main():
 		print(f"Factor de Escalado: x{upscale}")
 		print(f"Duracion de frames: {fps}ms")
 		
+		print("\n","-" * 17, " BFS ", "-" * 18,"\n")
+		bfs = BreadthFirstSearch(maze)
+		paths_bfs = bfs.solve()
+		print(paths_bfs)
+		maze.animate_paths(paths_bfs, upscale, "BFS", fps)
+
 		print("\n","-" * 17, " DFS ", "-" * 18,"\n")
 		dfs = DepthFirstSearch(maze)
 		paths_dfs = dfs.solve()
