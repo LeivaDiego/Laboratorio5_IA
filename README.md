@@ -2,6 +2,9 @@
 
 Este programa resuelve laberintos representados como imágenes tipo .bmp utilizando los algoritmos de búsqueda en anchura (BFS), búsqueda en profundidad (DFS) y A* (A estrella). Después de encontrar el camino en el laberinto para cada algoritmo, genera archivos GIF animados que muestran el proceso de búsqueda y la solución encontrada.
 
+## Video Demostrativo
+[Video](https://youtu.be/z1LwxTdcVgc)  
+
 ## Requisitos
 - Python 3.x
 - Las siguientes bibliotecas de Python:
